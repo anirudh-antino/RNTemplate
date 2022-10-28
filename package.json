@@ -1,8 +1,26 @@
 {
     "name": "react-native-template",
     "version": "0.0.1",
-    "description": "React Native Template",
-    "repository": "https://github.com/anirudh-antino/RNTemplate.git",
-    "author": "Anirudh Malik<anirudh.m@antino.io>",
-    "license": "MIT"
-  }
+    "keywords": [
+      "react-native",
+      "template",
+      "nativebase"
+    ],
+    "description": "The base template for react-native with NativeBase.",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/anirudh-antino/RNTemplate.git"
+    },
+    "files": [
+      "template",
+      "template.config.js"
+    ],
+    "license": "MIT",
+    "main": "template.config.js",
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Anirudh Malik<anirudh.m@antino.io>"
+}
