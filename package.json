@@ -1,0 +1,8 @@
+{
+    "name": "react-native-template",
+    "version": "0.0.1",
+    "description": "React Native Template",
+    "repository": "https://github.com/anirudh-antino/RNTemplate.git",
+    "author": "Anirudh Malik<anirudh.m@antino.io>",
+    "license": "MIT"
+  }
