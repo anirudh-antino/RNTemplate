@@ -20,3 +20,5 @@ Further information can be found here: https://github.com/react-native-community
 - Performant, flexible and extensible forms with easy-to-use validation using [React Hook Form](https://react-hook-form.com/get-started)
 - [Yup](https://www.npmjs.com/package/yup) to build schema for value parsing and validation
 - Includes example screens. [On Boarding](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/OnBoarding.screen.js), Authentication with [mobile](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/Login.screen.js) / [otp](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/OTP.screen.js) and a [Form](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/form-screen/Form.screen.js) screen.
+- Includes [Vector Icons](https://www.npmjs.com/package/react-native-vector-icons). Perfect for buttons, logos and nav/tab bars. Easy to extend, style and integrate into your project. 
+
