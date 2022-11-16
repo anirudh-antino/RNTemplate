@@ -22,3 +22,9 @@ Further information can be found here: https://github.com/react-native-community
 - Includes example screens. [On Boarding](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/OnBoarding.screen.js), Authentication with [mobile](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/Login.screen.js) / [otp](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/OTP.screen.js) and a [Form](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/form-screen/Form.screen.js) screen.
 - Includes [Vector Icons](https://www.npmjs.com/package/react-native-vector-icons). Perfect for buttons, logos and nav/tab bars. Easy to extend, style and integrate into your project. 
 
+## How to customize theme
+- Just navigate to `project/src/theme/customeTheme.js` and make the desired changes.[example file](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/theme/customTheme.js)
+- You can change colors, fonts, initial color mode(dark/light) etc.
+- [see more theme options](https://docs.nativebase.io/customizing-theme) 
+
+
