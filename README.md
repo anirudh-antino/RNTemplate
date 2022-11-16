@@ -67,6 +67,7 @@ Further information can be found here: https://github.com/react-native-community
         normal: 'Inter-Black',
       },
     },
+ }
 ```
 - Then run ``npx react-native link`` or ``yarn react-native link``
 - [Refer here for more](https://blog.logrocket.com/adding-custom-fonts-react-native)
