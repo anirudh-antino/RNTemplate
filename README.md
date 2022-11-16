@@ -15,8 +15,8 @@ Further information can be found here: https://github.com/react-native-community
 ## What's inside
 
 - UI/UX Design components from [NativeBase](https://docs.nativebase.io/?utm_source=HomePage&utm_medium=header&utm_campaign=NativeBase_3)
-- Redux for state management
-- React Navigation for simple navigation
+- Redux, [Redux Toolkit](https://redux-toolkit.js.org/introduction/getting-started) for state management 
+- [React Navigation](https://reactnavigation.org/docs/getting-started/) for simple navigation also includes custom bottom tab
 - Performant, flexible and extensible forms with easy-to-use validation using [React Hook Form](https://react-hook-form.com/get-started)
 - [Yup](https://www.npmjs.com/package/yup) to build schema for value parsing and validation
-- Includes On Boarding, Authentication with mobile/otp and a Form screen.
+- Includes example screens. [On Boarding](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/OnBoarding.screen.js), Authentication with [mobile](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/Login.screen.js) / [otp](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/auth/OTP.screen.js) and a [Form](https://github.com/anirudh-antino/RNTemplate/blob/main/template/src/screens/form-screen/Form.screen.js) screen.
