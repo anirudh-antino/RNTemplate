@@ -24,11 +24,14 @@ import {
   RHFSelect,
   RHFTimePicker,
   RHFCheckbox,
+  RHFAutoCompleteDropDown,
 } from '../../components/hook-form';
 import AppButton from '../../components/button/AppButton';
 import TopBar from '../../components/tab-bar/TopBar';
 // utils
 import createAvatar from '../../utils/createAvatar';
+// assets
+import { states } from '../../assets/file/states';
 
 const GENDER_DATA = [
   {
@@ -61,6 +64,7 @@ const Form = props => {
     name: Yup.string().required('Name is required'),
     gender: Yup.string().required('Gender is required'),
     time: Yup.string().required('Time is required'),
+    state: Yup.string().required('State is required'),
   });
 
   const methods = useForm({
@@ -70,11 +74,12 @@ const Form = props => {
       mobile: '',
       gender: 'Male',
       time: new Date(),
+      state: '',
       isDaily: true,
     },
   });
 
-  const {control, reset, getValues, handleSubmit} = methods;
+  const {control, reset, setValue, handleSubmit} = methods;
 
   const onSubmit = data => {
     setLoading(true);
@@ -106,7 +111,7 @@ const Form = props => {
       <KeyboardAvoidingView
         flex={1}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <ScrollView bg={'background.50'} showsVerticalScrollIndicator={false}>
+        <ScrollView bg={'background.50'} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
           <Box flex={1} p={'4'}>
             <Stack space={2}>
               <Avatar bg={createAvatar('P').color} alignSelf={'center'}>
@@ -139,6 +144,15 @@ const Form = props => {
                 name={'time'}
                 label={'Time'}
                 control={control}
+                isRequired
+              />
+
+              <RHFAutoCompleteDropDown
+                name={'state'}
+                label={'State'}
+                control={control}
+                dataSet={states}
+                setValue={setValue}
                 isRequired
               />
 
