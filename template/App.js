@@ -9,6 +9,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import RootNavigation from './src/navigation/RootNavigation';
 import Navigation from './src/navigation/Navigation';
 
+// netinfo
+import NetInfo from './src/components/netinfo/NetInfo';
+
 // theme provider
 import {NativeBaseProvider, StatusBar} from 'native-base';
 import {customTheme, colorModeManager} from './src/theme/customTheme';
@@ -34,6 +37,7 @@ export default function App() {
               barStyle="dark-content"
             />
             <RootNavigation />
+            <NetInfo/>
             <Toast />
           </NavigationContainer>
         </NativeBaseProvider>
