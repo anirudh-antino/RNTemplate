@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Platform} from 'react-native';
 import {Box, Image, KeyboardAvoidingView} from 'native-base';
+import Toast from 'react-native-toast-message';
 // redux
-import {useDispatch, useSelector} from '../../redux/store';
-import {sendOTP} from '../../redux/slices/user';
+import {useSendOtpMutation} from '../../redux/apiSlices/userApi';
 
 // form
 import {useForm} from 'react-hook-form';
@@ -17,8 +17,15 @@ import AppText from '../../components/text/AppText';
 import Loader from '../../components/loader/Loader';
 
 const Login = ({navigation}) => {
-  const dispatch = useDispatch();
-  const {loading} = useSelector(state => state.user.sendOTP);
+  const [sendOTP, {isLoading, isError, isSuccess}] = useSendOtpMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigation.navigate('otp', {mobileNo: parseInt(getValues('mobileNo'))});
+    } else if (isError) {
+      Toast.show({type: 'error', text1: 'Something went wrong!'});
+    }
+  }, [isError, isSuccess]);
 
   const MobileNoSchema = Yup.object().shape({
     mobileNo: Yup.string().matches(/^\d{10}$/, 'Phone number is not valid'),
@@ -30,15 +37,16 @@ const Login = ({navigation}) => {
       mobileNo: '9876543210',
     },
   });
-  const {control, handleSubmit} = methods;
+
+  const {control, getValues, handleSubmit} = methods;
 
   const onSubmit = data => {
-    dispatch(sendOTP({mobileNo: parseInt(data.mobileNo)}));
+    sendOTP({mobileNo: parseInt(data.mobileNo)});
   };
 
   return (
     <>
-      <Loader isLoading={loading} />
+      <Loader isLoading={isLoading} />
       <KeyboardAvoidingView
         flex={1}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -71,7 +79,7 @@ const Login = ({navigation}) => {
           />
         </Box>
         <AppButton
-          isDisabled={loading}
+          isDisabled={isLoading}
           label={'Get OTP'}
           onPress={handleSubmit(onSubmit)}
         />

@@ -127,7 +127,7 @@ const Form = props => {
 
               <RHFTextField
                 name={'mobile'}
-                label={'Mobile Nummber'}
+                label={'Mobile Number'}
                 control={control}
                 keyboardType={'numeric'}
                 maxLength={10}

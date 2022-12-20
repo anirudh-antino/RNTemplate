@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {Box, HStack, Link, Image} from 'native-base';
 // redux
-import {useDispatch, useSelector} from '../../redux/store';
-import {verifyOTP, sendOTP} from '../../redux/slices/user';
+import {
+  useVerifyOtpMutation,
+  useSendOtpMutation,
+} from '../../redux/apiSlices/userApi';
+import {useDispatch} from '../../redux/store';
+import {setLoggedIn} from '../../redux/slices/user';
+
 // toast
 import Toast from 'react-native-toast-message';
 
@@ -16,30 +21,21 @@ import Loader from '../../components/loader/Loader';
 export default function OTP(props) {
   const dispatch = useDispatch();
   const {mobileNo} = props.route.params;
-  const {loading} = useSelector(state => state.user.verifyOTP);
+  const [verify, {isLoading, isError, isSuccess, data}] = useVerifyOtpMutation();
+  const [sendOTP, result] = useSendOtpMutation();
 
   const [code, setCode] = useState('');
   const [remainingTime, setRemainingTime] = useState('01:00');
   const [expireTime, setExpireTime] = useState(60);
   const [isActive, setIsActive] = useState(true);
 
-
-  const resend = () => {
-    if (!isActive) {
-      reset();
-      dispatch(sendOTP({mobileNo}));
-      Toast.show({
-        type: 'info',
-        text1: `OTP Sent to ${mobileNo}`,
-      });
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setLoggedIn(data.data));
+    } else if (isError) {
+      Toast.show({type: 'error', text1: 'Something went wrong!'});
     }
-  };
-
-  const reset = () => {
-    setExpireTime(60);
-    setRemainingTime('01:00');
-    setIsActive(true);
-  };
+  }, [isError, isSuccess]);
 
   useEffect(() => {
     let interval = null;
@@ -63,11 +59,27 @@ export default function OTP(props) {
   }, [isActive, expireTime]);
 
 
-  const handleVerify = async(code) => {
+  const resend = () => {
+    if (!isActive) {
+      reset();
+      sendOTP({mobileNo});
+      Toast.show({
+        type: 'info',
+        text1: `OTP Sent to ${mobileNo}`,
+      });
+    }
+  };
+
+  const reset = () => {
+    setExpireTime(60);
+    setRemainingTime('01:00');
+    setIsActive(true);
+  };
+
+  const handleVerify = async code => {
     if (code) {
       try {
-        console.log(code)
-        dispatch(verifyOTP({mobileNo, otp: parseInt(code)}));
+        verify({mobileNo, otp: parseInt(code)});
       } catch (error) {
         Toast.show({
           type: 'error',
@@ -80,7 +92,7 @@ export default function OTP(props) {
   return (
     <>
       <TopBar />
-      <Loader isLoading={loading} />
+      <Loader isLoading={isLoading} />
       <Box
         flex={1}
         bg={'background.50'}
@@ -135,7 +147,11 @@ export default function OTP(props) {
           </Link>
         </HStack>
       )}
-      <AppButton isDisabled={loading} label={'Verify'} onPress={()=>handleVerify(code)} />
+      <AppButton
+        isDisabled={isLoading}
+        label={'Verify'}
+        onPress={() => handleVerify(code)}
+      />
     </>
   );
 }
