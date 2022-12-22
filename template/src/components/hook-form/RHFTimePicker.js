@@ -15,12 +15,13 @@ export default function RHFTimePicker({
   isReadOnly = false,
   isBorderRadius = true,
   inputWidth = '100%',
+  placeholder = '',
   ...other
 }) {
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
 
   const showTimePicker = () => {
-    !isDisabled &&setTimePickerVisibility(true);
+    !isDisabled && setTimePickerVisibility(true);
   };
 
   const hideTimePicker = () => {
@@ -39,25 +40,47 @@ export default function RHFTimePicker({
           isDisabled={isDisabled}
           isInvalid={!!error}
           isReadOnly={isReadOnly}>
-          <FormControl.Label>{label}</FormControl.Label>
+          <FormControl.Label
+            _text={{
+              fontWeight: '500',
+              fontSize: '12',
+            }}>
+            {label}
+          </FormControl.Label>
           <Pressable onPress={showTimePicker}>
             <Box
               borderWidth="1"
-              p={Platform.OS === 'ios' ? '1' : '3'}
-              borderRadius={isBorderRadius?8:0}
-              borderColor={isDisabled?"coolGray.100":"coolGray.300"}
+              p={Platform.OS === 'ios' ? '2' : '3'}
+              borderRadius={isBorderRadius ? 8 : 0}
+              borderColor={isDisabled ? 'coolGray.100' : 'coolGray.300'}
               {...other}>
-              <Text fontFamily={'body'} fontSize={14} fontWeight={500} color={isDisabled?"coolGray.400":"coolGray.900"}>
-                {format(new Date(value), 'hh:mm  a')}
-              </Text>
+              {value ? (
+                <Text
+                  fontFamily={'body'}
+                  fontSize={14}
+                  fontWeight={500}
+                  color={isDisabled ? 'coolGray.400' : 'coolGray.900'}>
+                  {format(new Date(value), 'dd/MM/yyyy')}
+                </Text>
+              ) : (
+                <Text
+                  fontFamily={'body'}
+                  fontSize={14}
+                  fontWeight={500}
+                  color={'coolGray.400'}>
+                  {placeholder}
+                </Text>
+              )}
             </Box>
           </Pressable>
           <DatePicker
             modal
-            mode="time"
+            mode="date"
+            maximumDate={new Date()}
+            minimumDate={new Date('2021-01-01')}
             open={isTimePickerVisible}
             date={new Date()}
-            onConfirm={(v)=>{
+            onConfirm={v => {
               onChange(v);
               hideTimePicker();
             }}
