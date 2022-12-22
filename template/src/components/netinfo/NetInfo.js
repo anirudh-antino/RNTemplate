@@ -32,7 +32,7 @@ const NetInfo = props => {
     });
   };
 
-  return (
+  return !showAlert ? null : (
     <Slide in={showAlert} placement="top">
       <Alert justifyContent="center" status="error" safeAreaTop={8}>
         <HStack space={2} justifyContent="center" alignItems={'center'}>
